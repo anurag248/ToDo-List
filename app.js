@@ -3,6 +3,8 @@ const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const date = require(__dirname + "/date.js");
 
+require('dotenv').config();
+
 const _ = require("lodash");
 
 const app = express();
@@ -12,7 +14,8 @@ app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static("public"));
 
-mongoose.connect("mongodb+srv://admin-anurag:anurag-100@cluster0.ftpes.mongodb.net/todolistDB");
+const password = process.env.DB_PW
+mongoose.connect("mongodb+srv://admin-anurag:"+password+"@cluster0.ftpes.mongodb.net/todolistDB");
 
 const itemsSchema = {
   name: String
